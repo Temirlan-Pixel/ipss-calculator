@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор IPSS</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        .container { max-width: 500px; margin: auto; }
+        .question { margin: 15px 0; }
+        button { padding: 10px 15px; font-size: 16px; margin-top: 10px; }
+        #result { margin-top: 20px; font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Калькулятор IPSS</h2>
+        <p>Ответьте на вопросы, чтобы рассчитать ваш балл IPSS.</p>
+        <form id="ipssForm">
+            <div class="question">
+                <label>1. Как часто у вас было ощущение неполного опорожнения мочевого пузыря?</label><br>
+                <select name="q1">
+                    <option value="0">Никогда</option>
+                    <option value="1">Менее чем 1 раз из 5</option>
+                    <option value="2">Менее чем в половине случаев</option>
+                    <option value="3">Около половины случаев</option>
+                    <option value="4">Чаще чем в половине случаев</option>
+                    <option value="5">Почти всегда</option>
+                </select>
+            </div>
+            <div class="question">
+                <label>2. Как часто у вас была необходимость мочиться чаще чем через 2 часа?</label><br>
+                <select name="q2">
+                    <option value="0">Никогда</option>
+                    <option value="1">Менее чем 1 раз из 5</option>
+                    <option value="2">Менее чем в половине случаев</option>
+                    <option value="3">Около половины случаев</option>
+                    <option value="4">Чаще чем в половине случаев</option>
+                    <option value="5">Почти всегда</option>
+                </select>
+            </div>
+            <div class="question">
+                <label>3. Как часто у вас был прерывистый поток мочи?</label><br>
+                <select name="q3">
+                    <option value="0">Никогда</option>
+                    <option value="1">Менее чем 1 раз из 5</option>
+                    <option value="2">Менее чем в половине случаев</option>
+                    <option value="3">Около половины случаев</option>
+                    <option value="4">Чаще чем в половине случаев</option>
+                    <option value="5">Почти всегда</option>
+                </select>
+            </div>
+            <div class="question">
+                <label>4. Как часто вам было трудно сдерживать мочеиспускание?</label><br>
+                <select name="q4">
+                    <option value="0">Никогда</option>
+                    <option value="1">Менее чем 1 раз из 5</option>
+                    <option value="2">Менее чем в половине случаев</option>
+                    <option value="3">Около половины случаев</option>
+                    <option value="4">Чаще чем в половине случаев</option>
+                    <option value="5">Почти всегда</option>
+                </select>
+            </div>
+            <div class="question">
+                <label>5. Как часто у вас был слабый напор мочи?</label><br>
+                <select name="q5">
+                    <option value="0">Никогда</option>
+                    <option value="1">Менее чем 1 раз из 5</option>
+                    <option value="2">Менее чем в половине случаев</option>
+                    <option value="3">Около половины случаев</option>
+                    <option value="4">Чаще чем в половине случаев</option>
+                    <option value="5">Почти всегда</option>
+                </select>
+            </div>
+            <div class="question">
+                <label>6. Как часто вам приходилось тужиться для начала мочеиспускания?</label><br>
+                <select name="q6">
+                    <option value="0">Никогда</option>
+                    <option value="1">Менее чем 1 раз из 5</option>
+                    <option value="2">Менее чем в половине случаев</option>
+                    <option value="3">Около половины случаев</option>
+                    <option value="4">Чаще чем в половине случаев</option>
+                    <option value="5">Почти всегда</option>
+                </select>
+            </div>
+            <div class="question">
+                <label>7. Сколько раз за ночь вы встаете для мочеиспускания?</label><br>
+                <select name="q7">
+                    <option value="0">Никогда</option>
+                    <option value="1">Один раз</option>
+                    <option value="2">Два раза</option>
+                    <option value="3">Три раза</option>
+                    <option value="4">Четыре раза</option>
+                    <option value="5">Пять раз и более</option>
+                </select>
+            </div>
+            <button type="button" onclick="calculateIPSS()">Рассчитать</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateIPSS() {
+            let form = document.getElementById("ipssForm");
+            let totalScore = 0;
+
+            for (let i = 1; i <= 7; i++) {
+                totalScore += parseInt(form["q" + i].value);
+            }
+
+            let resultText = "Ваш суммарный балл IPSS: " + totalScore + "<br>";
+
+            if (totalScore >= 0 && totalScore <= 7) {
+                resultText += "Симптомы слабовыраженные.";
+            } else if (totalScore >= 8 && totalScore <= 19) {
+                resultText += "Симптомы средней тяжести.";
+            } else {
+                resultText += "Симптомы выраженные. Рекомендуется обратиться к урологу.";
+            }
+
+            document.getElementById("result").innerHTML = resultText;
+        }
+    </script>
+</body>
+</html>
